@@ -1,0 +1,111 @@
+<div class="container-fluid default-font">
+    <div class="row" style="padding-top:50px;">
+        <div class="col-sm-1"></div>
+        <div class="pageheader col-sm-10 col-xs-12">
+            <div class="col-sm-2 col-xs-12 section-heading" style="padding-left: 0px;"><h2><span>Scoring</span></h2></div>
+            <div class="col-sm-10 col-xs-12"></div>
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10 col-xs-12">
+            <form (ngSubmit)="addToScorecard()">
+                <div class="col-sm-12 col-xs-12">
+                    <div class="form-group col-sm-4 col-xs-12">
+                        <label for="playerid" class="default-font">Player:</label>
+                        <select class="form-control" id="playerid" name="playerid" [(ngModel)]="playerid">
+                            <option *ngFor="let player of playersList" 
+                                    [ngValue]="player.playerid">{{player.name}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-4 col-xs-12">
+                        <label for="runs" class="default-font">Runs:</label>
+                        <input type="text" class="form-control" id="runs" name="runs" [(ngModel)]="scoreObj.runs" />
+                    </div>
+                    <div class="form-group col-sm-4 col-xs-12">
+                        <label for="wickets" class="default-font">Wickets:</label>
+                        <input type="text" class="form-control" id="wickets" name="wickets" [(ngModel)]="scoreObj.wickets" />
+                    </div>
+                </div>
+                <div class="col-sm-12 col-xs-12">
+                    <div class="form-group col-sm-4 col-xs-12">
+                        <label for="catches" class="default-font">Catches:</label>
+                        <input type="text" class="form-control" id="catches" name="catches" [(ngModel)]="scoreObj.catches" />
+                    </div>
+                    <div class="form-group col-sm-4 col-xs-12">
+                        <label for="runouts" class="default-font">Runouts:</label>
+                        <input type="text" class="form-control" id="runouts" name="runouts" [(ngModel)]="scoreObj.runouts" />
+                    </div>
+                    <div class="form-group col-sm-4 col-xs-12">
+                        <label for="mom" class="default-font">MoM:</label>
+                        <input type="text" class="form-control" id="mom" name="mom" [(ngModel)]="scoreObj.mom" />
+                    </div>
+                </div>
+                <div class="col-sm-12 col-xs-12">
+                    <div class="form-group col-sm-4 col-xs-12">
+                        <label for="fixture" class="default-font">Match:</label>
+                        <select class="form-control" id="fixture" name="fixture" [(ngModel)]="fixture">
+                            <option *ngFor="let fixture of fixuresList" 
+                                    [ngValue]="fixture">{{fixture.team1}} vs {{fixture.team2}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-4 col-xs-12"></div>
+                    <div class="form-group col-sm-4 col-xs-12">
+                        <button type="submit" class="btn btn-success btn-block" style="margin-top:25px;">Add</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10 col-xs-12">
+            <div class="table-responsive" style="border-bottom: 1px solid #eee;">
+                <table class="table">
+                    <thead>
+                        <tr class="tableHeader">
+                            <th>PlayerID</th>
+                            <th>Runs</th>
+                            <th>Batting Score</th>
+                            <th>Wickets</th>
+                            <th>Bowling Score</th>
+                            <th>Catches</th>
+                            <th>Runouts</th>
+                            <th>Fielding score</th>
+                            <th>MoM</th>
+                            <th>Total Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let score of scorecard">
+                            <td>{{score.playerid}}</td>
+                            <td>{{score.runs}}</td>
+                            <td>{{score.battingscore}}</td>
+                            <td>{{score.wickets}}</td>
+                            <td>{{score.bowlingscore}}</td>
+                            <td>{{score.catches}}</td>
+                            <td>{{score.runouts}}</td>
+                            <td>{{score.fieldingscore}}</td>
+                            <td>{{score.mom}}</td>
+                            <td>{{score.totalscore}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+    <!--<div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10 col-xs-12">
+            <div class="form-group col-sm-4 col-xs-12"></div>
+            <div class="form-group col-sm-4 col-xs-12"></div>
+            <div class="form-group col-sm-4 col-xs-12">
+                <button type="button" class="btn btn-success btn-block" style="margin-top:25px;" (click)="submitScore();">Submit</button>
+            </div>
+        </div>
+        <div class="col-sm-1"></div>
+    </div>-->
+</div>

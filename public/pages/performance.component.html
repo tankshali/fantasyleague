@@ -1,0 +1,83 @@
+<div class="container-fluid default-font">
+    <div class="row" style="padding-top:50px;">
+        <div class="col-sm-1"></div>
+        <div class="pageheader col-sm-10 col-xs-12">
+            <div class="col-sm-3 col-xs-12 section-heading" style="padding-left: 0px;"><h2><span>Performances</span></h2></div>
+            <div class="col-sm-9 col-xs-12"></div>
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+    <div class="row" style="padding-bottom: 15px;">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10 col-xs-12">
+            <form (ngSubmit)="viewPerformance()">
+                <div class="col-sm-12 col-xs-12">
+                    <div class="form-group col-sm-4 col-xs-12">
+                        <label for="playerid" class="default-font">Team Owner:</label>
+                        <select class="form-control" id="teamowner" name="teamowner" [(ngModel)]="teamowner">
+                            <option *ngFor="let teamowner of teamOwnersList" 
+                                    [ngValue]="teamowner._id.username">{{teamowner._id.firstname}}&nbsp;{{teamowner._id.lastname}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-4 col-xs-12">
+                        <label for="playerid" class="default-font">Date:</label>
+                        <select class="form-control" id="date" name="date" [(ngModel)]="selectedDate">
+                            <option *ngFor="let date of dateList" 
+                                    [ngValue]="date._id.date">{{date._id.date}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-4 col-xs-12">
+                        <button type="submit" class="btn btn-success btn-block" style="margin-top:28px;font-size: 18px;">View</button>
+                    </div>
+                </div>
+            </form>
+            <!--<h4>Sorry! This functionality is still under construction. Don't worry, your buddy is working on it and will make it available to you very soon.</h4>-->
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+    <div class="row" style="padding-bottom:20px;">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10 col-xs-12" style="border-top: 1px solid #eee;">
+            <div [hidden]="!noParticipationMsg" style="padding-top: 25px;padding-left: 10px;">{{noParticipationMsg}}</div>
+            <div [hidden]="!teamPlayersList || teamPlayersList.length == 0" style="padding-top: 15px;">
+                <div style="padding-left: 10px;">
+                    <span class="glyphicon glyphicon-education" style="font-size:22px;vertical-align: sub;"></span>
+                    <span> - Captain</span>
+                </div>
+                <div style="padding-left: 10px;">
+                    <span class="glyphicon glyphicon-bishop" style="font-size:22px;vertical-align: sub;"></span>
+                    <span> - Man of the Match</span>
+                </div>
+                <div style="padding-left: 10px;">
+                    <span class="glyphicon glyphicon-plane" style="font-size:22px;vertical-align: sub;"></span>
+                    <span> - Foreign Player</span>
+                </div>
+            </div>  
+            <div class="panel-group" id="accordion" style="padding-top: 15px;">
+                <ng-container *ngFor="let teamplayer of teamPlayersList; let id = index;">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h4 class="panel-title">
+                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{id}}">
+                              <span>{{teamplayer.name}}&nbsp;({{teamplayer.totalscore || '0'}})</span>
+                              <span *ngIf="teamplayer.type == 'Foreign'" class="glyphicon glyphicon-plane" style="font-size:22px;vertical-align: sub;"></span>
+                              <span *ngIf="teamplayer.captain == 1" class="glyphicon glyphicon-education" style="font-size:22px;vertical-align: sub;"></span>
+                              <span *ngIf="teamplayer.mom == 1" class="glyphicon glyphicon-bishop" style="font-size:22px;vertical-align: sub;"></span>
+                          </a>
+                        </h4>
+                      </div>
+                      <div id="collapse{{id}}" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="col-sm-3 col-xs-12">Runs: {{teamplayer.runs || '0'}}</div>
+                            <div class="col-sm-3 col-xs-12">Wickets: {{teamplayer.wickets || '0'}}</div>
+                            <div class="col-sm-3 col-xs-12">Catches: {{teamplayer.catches || '0'}}</div>
+                            <div class="col-sm-3 col-xs-12">Runouts: {{teamplayer.runouts || '0'}}</div>
+                        </div>
+                      </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+</div>

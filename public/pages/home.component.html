@@ -1,0 +1,68 @@
+<div class="jumbotron text-center">
+  <h1>Welcome to MFL</h1> 
+  <p>Showcase your cricket knowledge by building your own team and compete with your friends</p> 
+</div>
+
+<div class="container-fluid">
+	<div class="row" style="margin:25px 0px;">
+        <div class="col-sm-1"></div>
+		<div class="col-sm-6 col-xs-12 default-font shadow-box" style="margin-right:15px;margin-bottom:15px;background-color: #F45145;">
+            <div style="padding: 15px 0px;">
+                <table class="table" style="color:white;">
+                    <tr>
+                        <td class="no-top-border"><span class="glyphicon glyphicon-tags" style="font-size:20px;"></span></td>
+                        <td class="no-top-border">MFL is a free game for cricket lovers and a great way to follow a particular cricket tournament with your friends</td>
+                    </tr>
+                    <tr>
+                        <td class="no-top-border"><span class="glyphicon glyphicon-tags" style="font-size:20px;"></span></td>
+                        <td class="no-top-border">You get to build your team by selecting 11 players for that particular day's match and you get points based your team player's actual performance in that match</td>
+                    </tr>
+                    <tr>
+                        <td class="no-top-border"><span class="glyphicon glyphicon-tags" style="font-size:20px;"></span></td>
+                        <td class="no-top-border">The real fun is when you create a league among your friend and compete with them</td>
+                    </tr>
+                    <tr>
+                        <td class="no-top-border"><span class="glyphicon glyphicon-tags" style="font-size:20px;"></span></td>
+                        <td class="no-top-border">Ongoing Tournament : Champions Trophy</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+	    <div class="col-sm-4 col-xs-12 shadow-box">
+	    	<div style="padding: 10px 0px;">
+	    		<div [hidden]="signupEvent" class="default-font">Don't have an account? &nbsp; <button type="button" class="btn btn-link" (click)="signup()">Sign up</button></div>
+                <div [hidden]="!signupEvent" class="default-font">Already have an account? &nbsp; <button type="button" class="btn btn-link" (click)="signin()">Sign in</button></div>
+                <div [hidden]="!errorMsg" class="alert alert-danger default-font">{{errorMsg}}</div>
+	    		<form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+				    <div [hidden]="!signupEvent" class="form-group">
+				      <label for="firstname" class="default-font">First Name:</label>
+				      <input type="text" class="form-control" id="firstname" name="firstname" [required]="signupEvent" [(ngModel)]="user.firstname" #firstname="ngModel">
+				    </div>
+                    <div [hidden]="!signupEvent" class="form-group">
+				      <label for="lastname" class="default-font">Last Name:</label>
+				      <input type="text" class="form-control" id="lastname" name="lastname" [required]="signupEvent" [(ngModel)]="user.lastname" #lastname="ngModel">
+				    </div>
+                    <div class="form-group">
+				      <label for="userid" class="default-font">UserId:</label>
+				      <input type="text" class="form-control" id="username" name="username" required [(ngModel)]="user.username" #username="ngModel">
+				    </div>
+				    <div class="form-group">
+				      <label for="password" class="default-font">Password:</label>
+				      <input type="password" class="form-control" id="password" name="password" required [(ngModel)]="user.password" #password="ngModel">
+				    </div>
+                    <div [hidden]="!signupEvent" class="form-group">
+				      <label for="confirmpassword" class="default-font">Re-enter Password:</label>
+				      <input type="password" class="form-control" id="confirmpassword" name="confirmpassword" [required]="signupEvent" [(ngModel)]="user.confirmpassword" #confirmpassword="ngModel">
+				    </div>
+				    <div [hidden]="signupEvent" class="form-group" style="padding-top: 15px;">
+				    	<button type="submit" class="btn btn-success btn-block" style="font-size: 20px;">Sign in</button>
+                    </div>
+                    <div [hidden]="!signupEvent" class="form-group" style="padding-top: 15px;">
+				    	<button type="submit" class="btn btn-success btn-block" style="font-size: 20px;">Sign up</button>
+				    </div>
+				</form>
+	    	</div>      
+	    </div>
+        <div class="col-sm-1"></div>
+	</div>
+</div>

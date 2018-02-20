@@ -1,0 +1,172 @@
+<div class="container-fluid default-font">
+    <div class="row" style="padding-top:50px;">
+        <div class="col-sm-1"></div>
+        <div class="pageheader col-sm-10 col-xs-12">
+            <div class="col-sm-3 col-xs-12 section-heading" style="padding-left: 0px;"><h2><span>Next Match(s)</span></h2></div>
+            <div class="col-sm-9 col-xs-12"></div>
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+    <div class="row" style="font-weight:bold;font-size:medium;">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10 col-xs-12">
+            <div *ngFor="let fixure of fixureList">{{fixure.team1}} &nbsp; vs &nbsp; {{fixure.team2}}</div>
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+    <div class="row" style="text-align:center;padding-top:20px;">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-2 col-xs-12">
+            <div [ngClass]="{'btn': true, 'btn-danger': validationObj.numOfPlayers != actualObj.numOfPlayers, 'btn-success': validationObj.numOfPlayers == actualObj.numOfPlayers}" style="width:100%;">Players</div>
+            <div class="stats" style="border-bottom: 1px solid #eee;">{{validationObj.numOfPlayers}}</div>
+            <div class="stats">{{actualObj.numOfPlayers}}</div>
+        </div>
+        <div class="col-sm-2 col-xs-12">
+            <div [ngClass]="{'btn': true, 'btn-danger': actualObj.foreignPlayers > validationObj.maxForeignPlayers, 'btn-success': actualObj.foreignPlayers <= validationObj.maxForeignPlayers}" style="width:100%;">Foreign Players</div>
+            <div class="stats" style="border-bottom: 1px solid #eee;">0-{{validationObj.maxForeignPlayers}}</div>
+            <div class="stats">{{actualObj.foreignPlayers}}</div>
+        </div>
+        <div class="col-sm-2 col-xs-12">
+            <div [ngClass]="{'btn': true, 'btn-danger': actualObj.numOfWicketKeeper < validationObj.minWicketKeeper, 'btn-success': actualObj.numOfWicketKeeper >= validationObj.minWicketKeeper}" style="width:100%;">Wicket Keeper</div>
+            <div class="stats" style="border-bottom: 1px solid #eee;">{{validationObj.minWicketKeeper}}+</div>
+            <div class="stats">{{actualObj.numOfWicketKeeper}}</div>
+        </div>
+        <div class="col-sm-2 col-xs-12">
+            <div [ngClass]="{'btn': true, 'btn-danger': actualObj.numOfBowlers < validationObj.minBowlers, 'btn-success': actualObj.numOfBowlers >= validationObj.minBowlers}" style="width:100%;">Can Bowl</div>
+            <div class="stats" style="border-bottom: 1px solid #eee;">{{validationObj.minBowlers - 1}}+</div>
+            <div class="stats">{{actualObj.numOfBowlers}}</div>
+        </div>
+        <div class="col-sm-2 col-xs-12">
+            <div [ngClass]="{'btn': true, 'btn-danger': actualObj.budget > validationObj.budget, 'btn-success': actualObj.budget <= validationObj.budget}" style="width:100%;">Budget(Cr)</div>
+            <div class="stats" style="border-bottom: 1px solid #eee;">{{validationObj.budget}}</div>
+            <div class="stats">{{actualObj.budget}}</div>
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+    <div class="row" style="padding-top:20px;">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-5 col-xs-12" style="padding-bottom:20px;">
+            <div style="padding-bottom:10px;font-weight: 700;">Select Players (Click on player name to see more details)</div>
+            <!--<div class="table-responsive" style="max-height: 600px;overflow-y:scroll;">
+                <table class="table">
+                    <thead>
+                        <tr class="tableHeader">
+                            <th>Name</th>
+                            <th>Team</th>
+                            <th>Role</th>
+                            <th>Price</th>
+                            <th>Select</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let player of playerList">
+                            <td>{{player.name}}&nbsp;<span *ngIf="player.type == 'Foreign'" class="glyphicon glyphicon-plane" style="font-size:16px;"></span></td>
+                            <td>{{player.team}}</td>
+                            <td>{{player.role}}</td>
+                            <td>{{player.price}}</td>
+                            <td style="text-align:center;">
+                                <span class="glyphicon glyphicon-plus-sign" style="font-size:26px;color:#5cb85c;" (click)="addToTeam(player.playerid);"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>-->
+            <div class="panel-group" id="accordion1" style="max-height: 600px;overflow-y:scroll;">
+                <ng-container *ngFor="let player of playerList; let id = index;">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <!--<div style="display:inline;">-->
+                              <a data-toggle="collapse" data-parent="#accordion1" href="#collapse{{id}}">
+                                  <span>{{player.name}}</span>
+                                  <span *ngIf="player.type == 'Foreign'" class="glyphicon glyphicon-plane" style="font-size:16px;"></span>
+                                  
+                              </a>
+                            <!--</div>-->
+                            <div style="display:inline;float:right;">
+                                  <span style="vertical-align: super;">{{player.price}}</span>
+                                  <span style="vertical-align: super;">Cr&nbsp;</span>
+                                  <span class="glyphicon glyphicon-plus-sign" style="font-size:26px;cursor: pointer;" (click)="addToTeam(player.playerid);"></span>
+                            </div>
+                        </h4>
+                      </div>
+                      <div id="collapse{{id}}" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="col-sm-6 col-xs-12">Team: {{player.team}}</div>
+                            <div class="col-sm-6 col-xs-12">Role: {{player.role}}</div>
+                        </div>
+                      </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+        <div class="col-sm-5 col-xs-12">
+            <!--<div class="table-responsive" style="border-bottom: 1px solid #eee;">
+                <table class="table">
+                    <thead>
+                        <tr class="tableHeader">
+                            <th>Name</th>
+                            <th>Team</th>
+                            <th>Role</th>
+                            <th>Price</th>
+                            <th>Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let selectedPlayer of selectedPlayerList">
+                            <td>{{selectedPlayer.name}}&nbsp;<span *ngIf="selectedPlayer.type == 'Foreign'" class="glyphicon glyphicon-plane" style="font-size:16px;"></span></td>
+                            <td>{{selectedPlayer.team}}</td>
+                            <td>{{selectedPlayer.role}}</td>
+                            <td>{{selectedPlayer.price}}</td>
+                            <td style="text-align:center;">
+                                <span class="glyphicon glyphicon-minus-sign" style="font-size:26px;color:#c9302c;" (click)="removeFromTeam(selectedPlayer.playerid);"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>-->
+            <div style="padding-bottom:10px;font-weight: 700;">My Team</div>
+            <div class="panel-group" id="accordion2" style="border-bottom: 1px solid #eee;">
+                <ng-container *ngFor="let player of selectedPlayerList; let id = index;">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <!--<div style="display:inline;">-->
+                              <a data-toggle="collapse" data-parent="#accordion2" href="#collapseSelected{{id}}">
+                                  <span>{{player.name}}</span>
+                                  <span *ngIf="player.type == 'Foreign'" class="glyphicon glyphicon-plane" style="font-size:16px;"></span>
+                                  
+                              </a>
+                            <!--</div>-->
+                            <div style="display:inline;float:right;">
+                                  <span style="vertical-align: super;">{{player.price}}</span>
+                                  <span style="vertical-align: super;">Cr&nbsp;</span>
+                                  <span class="glyphicon glyphicon-minus-sign" style="font-size:26px;cursor: pointer;" (click)="removeFromTeam(player.playerid);"></span>
+                            </div>
+                        </h4>
+                      </div>
+                      <div id="collapseSelected{{id}}" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="col-sm-6 col-xs-12">Team: {{player.team}}</div>
+                            <div class="col-sm-6 col-xs-12">Role: {{player.role}}</div>
+                        </div>
+                      </div>
+                    </div>
+                </ng-container>
+            </div>
+            <div class="form-group" style="padding-top:30px;">
+                <label for="selCaptain">Select a captain (Points gets multiplied by 2 for captain)</label>
+                <select class="form-control" id="selCaptain" [(ngModel)]="selectedCaptainId">
+                    <option *ngFor="let player of selectedPlayerList" 
+                            [ngValue]="player.playerid">{{player.name}}</option>
+                </select>
+            </div>
+            <div style="text-align:right;padding-bottom:15px;">
+                <button type="button" class="btn btn-success" (click)="submitTeam();">Submit</button>
+            </div>
+            <div [hidden]="!errorMsg" class="alert alert-danger default-font">{{errorMsg}}</div>
+            <div [hidden]="!successMsg" class="alert alert-success default-font">{{successMsg}}</div>
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+</div>

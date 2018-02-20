@@ -1,0 +1,32 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button *ngIf="rootObj.authenticated" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#myPage"><img alt="" src="images/mfl.png" width="40px" height="40px" style="float:left;margin-top:-10px;"/>
+          <div style="float:left;padding-left: 15px;" *ngIf="!rootObj.authenticated">Marvels Fantasy League</div>
+          <div style="float:left;padding-left: 15px;font-size: 24px;" *ngIf="rootObj.authenticated">MFL</div></a>
+    </div>
+    <div *ngIf="rootObj.authenticated" class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li [routerLinkActive]="['active']"><a routerLink="dashboard" data-toggle="collapse" data-target=".in">DASHBOARD</a></li>
+        <li [routerLinkActive]="['active']"><a routerLink="rules" data-toggle="collapse" data-target=".in">RULES</a></li>
+        <li [routerLinkActive]="['active']"><a routerLink="teamselection" data-toggle="collapse" data-target=".in">MY TEAM</a></li>
+		<li [routerLinkActive]="['active']"><a routerLink="viewperformances" data-toggle="collapse" data-target=".in">VIEW PERFORMANCES</a></li>
+        <li><a (click)="signout()" style="cursor: pointer;" data-toggle="collapse" data-target=".in">LOGOUT</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>
+
+<nav class="navbar navbar-default">
+  <div class="container" style="padding-top:15px;">
+  	<div style="color:#fff;letter-spacing: 1px;padding-bottom: 8px">Marvels Fantasy League is not affiliated in any way to and claims no association, in any capacity whatsoever, with ICC, BCCI, IPL or any other cricket association/boards. Marvels Fantasy League acknowledges that the ICC, BCCI/IPL and its franchises own all proprietary names relating to the relevant tournament.</div>
+  	<div style="color:#fff;letter-spacing: 1px;padding-bottom: 15px">Copyright 2017, TechMarvels Ltd., All rights reserved.</div>
+  </div>
+</nav>
