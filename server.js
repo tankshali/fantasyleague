@@ -12,7 +12,7 @@ var api = require('./routes/api');
 var authenticate = require('./routes/authenticate')(passport);
 var mongoose = require('mongoose');    
 var url = 'mongodb://admin:bi5CeQ5_fz6D@'||process.env.OPENSHIFT_MONGODB_DB_HOST||':'||process.env.OPENSHIFT_MONGODB_DB_PORT||'/fantasyleague';
-mongoose.connect('mongodb://admin:bi5CeQ5_fz6D@127.0.0.1:27017/fantasyleague');            //connect to Mongo
+mongoose.connect('mongodb://admin:bi5CeQ5_fz6D@172.30.1.67:27017/fantasyleague');            //connect to Mongo
 var app = express();
 
 app.use(session({
