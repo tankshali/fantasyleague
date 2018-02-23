@@ -18,9 +18,9 @@ var mongoServiceName = process.env.DATABASE_SERVICE_NAME.toUpperCase(),
       mongoPassword = process.env[mongoServiceName + '_PASSWORD']
       mongoUser = process.env[mongoServiceName + '_USER'];
 var url = 'mongodb://admin:bi5CeQ5_fz6D@'||process.env.OPENSHIFT_MONGODB_DB_HOST||':'||process.env.OPENSHIFT_MONGODB_DB_PORT||'/fantasyleague';
-//mongoose.connect('mongodb://admin:bi5CeQ5_fz6D@172.30.1.67:27017/fantasyleague',{auth:{authdb:"admin"}});            //connect to Mongo
+mongoose.connect('mongodb://admin:bi5CeQ5_fz6D@172.30.182.175:27017/fantasyleague',{auth:{authdb:"admin"}});            //connect to Mongo
 //mongoose.connect('mongodb://admin:bi5CeQ5_fz6D@'||mongoHost||':27017/fantasyleague',{auth:{authdb:"admin"}});
-mongoose.connect(process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL);
+//mongoose.connect(process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL);
 var app = express();
 
 app.use(session({
@@ -50,5 +50,4 @@ app.set('ip', process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0');
 
 http.createServer(app).listen(app.get('port') ,app.get('ip'), function () {
     console.log("Express server listening at %s:%d ", app.get('ip'),app.get('port'));
-    console.log("Mongodb URL - %s",process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL);
 });
