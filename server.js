@@ -11,18 +11,11 @@ var index = require('./routes/index');
 var api = require('./routes/api');
 var authenticate = require('./routes/authenticate')(passport);
 var mongoose = require('mongoose');
-var mongoServiceName = process.env.DATABASE_SERVICE_NAME.toUpperCase(),
-      mongoHost = process.env[mongoServiceName + '_SERVICE_HOST'],
-      mongoPort = process.env[mongoServiceName + '_SERVICE_PORT'],
-      mongoDatabase = process.env[mongoServiceName + '_DATABASE'],
-      mongoPassword = process.env[mongoServiceName + '_PASSWORD']
-      mongoUser = process.env[mongoServiceName + '_USER'];
-var url = 'mongodb://admin:bi5CeQ5_fz6D@'||process.env.OPENSHIFT_MONGODB_DB_HOST||':'||process.env.OPENSHIFT_MONGODB_DB_PORT||'/fantasyleague';
 //console.log('process.env.OPENSHIFT_MONGODB_DB_HOST - %s',process.env.OPENSHIFT_MONGODB_DB_HOST);
-//mongoose.connect('mongodb://admin:bi5CeQ5_fz6D@172.30.182.175:27017/fantasyleague',{auth:{authdb:"admin"}});//Cluster IP
+mongoose.connect('mongodb://admin:bi5CeQ5_fz6D@172.30.182.175:27017/fantasyleague');//Cluster IP
 //mongoose.connect('mongodb://admin:bi5CeQ5_fz6D@10.129.158.152:27017/fantasyleague',{auth:{authdb:"admin"}});//Pod IP
-var conStr = 'mongodb://admin:bi5CeQ5_fz6D@'+process.env.OPENSHIFT_MONGODB_DB_HOST+':27017/fantasyleague';
-mongoose.connect(conStr);
+//var conStr = 'mongodb://admin:bi5CeQ5_fz6D@'+process.env.OPENSHIFT_MONGODB_DB_HOST+':27017/fantasyleague';
+//mongoose.connect(conStr);
 //mongoose.connect('mongodb://admin:bi5CeQ5_fz6D@'||mongoHost||':27017/fantasyleague',{auth:{authdb:"admin"}});
 //mongoose.connect(process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL);
 var app = express();
