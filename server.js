@@ -43,7 +43,7 @@ var initPassport = require('./passport-init');
 initPassport(passport);  
 
 app.set('port', process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080);
-app.set('ip', process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '172.30.132.91');
+app.set('ip', process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1');
 app.set('mongodbhost', process.env.OPENSHIFT_MONGODB_DB_HOST);
 
 http.createServer(app).listen(app.get('port') ,app.get('ip'), function () {
