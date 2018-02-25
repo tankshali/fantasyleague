@@ -21,7 +21,7 @@ var url = 'mongodb://admin:bi5CeQ5_fz6D@'||process.env.OPENSHIFT_MONGODB_DB_HOST
 //console.log('process.env.OPENSHIFT_MONGODB_DB_HOST - %s',process.env.OPENSHIFT_MONGODB_DB_HOST);
 //mongoose.connect('mongodb://admin:bi5CeQ5_fz6D@172.30.182.175:27017/fantasyleague',{auth:{authdb:"admin"}});//Cluster IP
 //mongoose.connect('mongodb://admin:bi5CeQ5_fz6D@10.129.158.152:27017/fantasyleague',{auth:{authdb:"admin"}});//Pod IP
-var conStr = 'mongodb://admin:bi5CeQ5_fz6D@'||process.env.OPENSHIFT_MONGODB_DB_HOST||':27017/fantasyleague';
+var conStr = 'mongodb://admin:bi5CeQ5_fz6D@'+process.env.OPENSHIFT_MONGODB_DB_HOST+':27017/fantasyleague';
 mongoose.connect(conStr);
 //mongoose.connect('mongodb://admin:bi5CeQ5_fz6D@'||mongoHost||':27017/fantasyleague',{auth:{authdb:"admin"}});
 //mongoose.connect(process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL);
